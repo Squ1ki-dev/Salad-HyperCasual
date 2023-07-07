@@ -6,6 +6,7 @@ public class Player : Singleton<Player>
 {
     private Vector3 pos;
     private Transform movementTransform;
+    [SerializeField] private Animator _animator;
     
     [SerializeField] private float _movementSpeed, _xSpeed, _limitX;
 
@@ -34,6 +35,7 @@ public class Player : Singleton<Player>
 
     private void SwerveMovement()
     {
+        _animator.SetBool("isRunning", true);
         pos += Vector3.forward * _movementSpeed * Time.deltaTime;
 
         if (Input.GetMouseButton(0))

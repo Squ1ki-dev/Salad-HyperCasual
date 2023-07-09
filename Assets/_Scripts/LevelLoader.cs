@@ -17,9 +17,7 @@ public class LevelLoader : Singleton<LevelLoader>
         base.Awake();
 
         foreach (var item in Resources.LoadAll<GameObject>("Levels"))
-        {
             Levels.Add(item);
-        }
     }
 
     private void Start() => LevelCreated();

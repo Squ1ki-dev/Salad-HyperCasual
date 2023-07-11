@@ -22,6 +22,10 @@ public class UISystem : Singleton<UISystem>
         EventManager.OnLose += OnLosePanel;
     }
 
+    private void Start() {
+        levelText.GetComponent<Text>().text = Tags.Level + " " + (PlayerPrefs.GetInt(Tags.Level) +1).ToString();
+    }
+
     private void OnBeginPanelState()
     {
         startPanel.SetActive(true);

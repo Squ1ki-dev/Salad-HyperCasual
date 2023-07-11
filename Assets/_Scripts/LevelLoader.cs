@@ -30,7 +30,14 @@ public class LevelLoader : Singleton<LevelLoader>
     public void LevelCreated()
     {
         ResetLevels();
-        Instantiate(Levels[LevelCount % Levels.Count],transform);
+        if (LevelCount >= Levels.Count)
+        {
+            int randomIndex = UnityEngine.Random.Range(0, Levels.Count);
+            Instantiate(Levels[randomIndex], transform);
+        }
+        else
+            Instantiate(Levels[LevelCount], transform);
+
         GameStateEvent.Fire_OnChangeGameState(State.Begin);
     }
 
@@ -43,6 +50,5 @@ public class LevelLoader : Singleton<LevelLoader>
                 Destroy(transform.GetChild(i).gameObject);
             }
         }
-
     }
 }

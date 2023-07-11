@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using UnityEngine;
 
 public enum FoodType
@@ -12,6 +14,7 @@ public class Food : MonoBehaviour
 
     [SerializeField] private float harmfulFoodPercentage = -10f;
     [SerializeField] private float healthyFoodPercentage = 5f;
+    [SerializeField] private ParticleSystem boomParticle;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -22,22 +25,23 @@ public class Food : MonoBehaviour
             {
                 case FoodType.Harmful:
                     player.ModifyPercentage(harmfulFoodPercentage);
-                    //AdjustPlayerPercentage(harmfulFoodPercentage);
+                    StartCoroutine(DeleteFood());
                     Debug.Log("Harmful food triggered! Percentage adjusted: " + harmfulFoodPercentage);
                     break;
                 case FoodType.Healthy:
                     player.ModifyPercentage(healthyFoodPercentage);
-                    //AdjustPlayerPercentage(healthyFoodPercentage);
+                    StartCoroutine(DeleteFood());
                     Debug.Log("Healthy food triggered! Percentage adjusted: " + healthyFoodPercentage);
                     break;
             }
         }
     }
 
-    // private void AdjustPlayerPercentage(float percentage)
-    // {
-    //     Player player = gameObject.GetComponent<Player>();
-    //     player.ModifyPercentage(percentage);
-    // }
+    private IEnumerator DeleteFood()
+    {
+        boomParticle.Play();
+        yield return new WaitForSeconds(0.1f);
+        Destroy(gameObject);
+    }
 }
 

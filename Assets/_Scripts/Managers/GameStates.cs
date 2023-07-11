@@ -47,6 +47,9 @@ public class GameStates : Singleton<GameStates>
             case State.Lose:
                 HandleLose();
                 break;
+            case State.GameEnd:
+                HandleGameEnd();
+                break;
             default:
                 break;
         }
@@ -59,6 +62,8 @@ public class GameStates : Singleton<GameStates>
         EventManager.OnPlay();
         EventManager.OnStartMovements();
     }
+
+    public void HandleGameEnd() => EventManager.OnFinishAreas();
 
     public void HandleWin() => EventManager.OnWins();
     public void HandleLose() => EventManager.OnLoses();

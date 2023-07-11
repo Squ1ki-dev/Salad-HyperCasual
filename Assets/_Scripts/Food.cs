@@ -21,10 +21,12 @@ public class Food : MonoBehaviour
             switch (foodType)
             {
                 case FoodType.Harmful:
+                    player.ModifyPercentage(harmfulFoodPercentage);
                     //AdjustPlayerPercentage(harmfulFoodPercentage);
                     Debug.Log("Harmful food triggered! Percentage adjusted: " + harmfulFoodPercentage);
                     break;
                 case FoodType.Healthy:
+                    player.ModifyPercentage(healthyFoodPercentage);
                     //AdjustPlayerPercentage(healthyFoodPercentage);
                     Debug.Log("Healthy food triggered! Percentage adjusted: " + healthyFoodPercentage);
                     break;
@@ -32,10 +34,10 @@ public class Food : MonoBehaviour
         }
     }
 
-    private void AdjustPlayerPercentage(float percentage)
-    {
-        // PlayerStats playerStats = other.gameObject.GetComponent<PlayerStats>();
-        // playerStats.ModifyPercentage(percentage);
-    }
+    // private void AdjustPlayerPercentage(float percentage)
+    // {
+    //     Player player = gameObject.GetComponent<Player>();
+    //     player.ModifyPercentage(percentage);
+    // }
 }
 

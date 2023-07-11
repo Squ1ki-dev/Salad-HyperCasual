@@ -6,7 +6,7 @@ using TMPro;
 
 public class UISystem : Singleton<UISystem>
 {
-    [SerializeField] private GameObject startPanel, winPanel, losePanel;
+    [SerializeField] private GameObject startPanel, gamePanel, winPanel, losePanel;
     //[SerializeField] private TMP_Text scoreText,totalScore;
 
     //private GameObject scoreParent;
@@ -25,6 +25,7 @@ public class UISystem : Singleton<UISystem>
     private void OnBeginPanelState()
     {
         startPanel.SetActive(true);
+        gamePanel.SetActive(false);
         //winPanel.SetActive(false);
         //losePanel.SetActive(false);
     }
@@ -32,6 +33,7 @@ public class UISystem : Singleton<UISystem>
     public void StartGame()
     {
         startPanel.SetActive(false);
+        gamePanel.SetActive(true);
         GameStateEvent.Fire_OnChangeGameState(State.Play);
     }
 

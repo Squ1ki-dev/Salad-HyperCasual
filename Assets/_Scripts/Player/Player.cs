@@ -1,13 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : Singleton<Player>
 {
     private Vector3 pos;
     private Transform movementTransform;
     [SerializeField] private Animator _animator;
+
+    [SerializeField] private Image _fillImage;
     
+    private float _percentageOfFill;
     [SerializeField] private float _movementSpeed, _xSpeed, _limitX;
 
     private float mouseX;
@@ -28,10 +32,7 @@ public class Player : Singleton<Player>
         SwerveMovement();
     } 
 
-    private void OnFinishArea()
-    {
-        _xSpeed = 0;
-    }
+    private void OnFinishArea() => _xSpeed = 0;
 
     private void SwerveMovement()
     {
@@ -46,5 +47,18 @@ public class Player : Singleton<Player>
 
         pos = new Vector3(Mathf.Clamp(pos.x, -_limitX, _limitX), pos.y, pos.z);
         transform.position = pos;
+    }
+
+    public void ModifyPercentage(float value)
+    {
+        _percentageOfFill += value;
+        UpdateFillImage();
+    }
+
+    private void UpdateFillImage()
+    {
+        _percentageOfFill = Mathf.Clamp(_percentageOfFill, 0f, 100f);
+        float fillAmount = _percentageOfFill / 100f;
+        _fillImage.fillAmount = fillAmount;
     }
 }
